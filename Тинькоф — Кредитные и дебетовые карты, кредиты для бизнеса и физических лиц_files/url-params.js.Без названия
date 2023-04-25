@@ -1,0 +1,32 @@
+const appName = document.location.search.match('app=[a-zA-Z_]+');
+const authSystem = document.location.search.match('auth=[a-zA-Z_]+');
+
+function setParams(appName, authSystem) {
+    window.TCS.appName = appName[0].replace('=', '/');
+    window.TCS.authSystem = !!authSystem ? authSystem[0].replace('auth=', '') : undefined;
+}
+
+if (appName) {
+    setParams(appName, authSystem);
+} else {
+    window.addEventListener('message', function listener(event) {
+        if (!event.data) {
+            return;
+        }
+
+        if (event.data.messageCode === 'tmsg-url-response') {
+            const appName = event.data.data.match('app=[a-zA-Z_]+');
+            const authSystem = event.data.data.match('auth=[a-zA-Z_]+');
+
+            if (appName) {
+                setParams(appName, authSystem);
+            }
+
+            window.removeEventListener('message', listener);
+        }
+    });
+
+    window.parent.postMessage({
+        messageCode: 'tmsg-url-request'
+    }, '*');
+}
