@@ -1,0 +1,13 @@
+window.TCS = {
+    project: 'tmsg-web',
+    sentryDSN: 'https://7bf07cff6a8241d085e2d47266a0b33c@tmsg-sentry.tinkoff.ru/24',
+    sentryRelease: '1.58.0',
+    appName: 'app/default',
+    analyticsApiKey: '3c70616aadafab85f029119560229a0d',
+    useAnalytics: true,
+    isProd: true,
+    appLogName: 'tmsg-client-chat',
+    featureConfig: {
+        headerLogo: null,
+    },
+};
