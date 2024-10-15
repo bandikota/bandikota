@@ -5,6 +5,13 @@ $(function() {
     });
 })
 $(function() {
+    $(".mobile-nav-btn").on("click", function() {
+        $('.mobile-nav').toggleClass('open');
+        $('.icon-menu').toggleClass('open');
+
+    });
+})
+$(function() {
     let header = $('.header');
     let hederHeight = header.height(); // вычисляем высоту шапки
 
@@ -22,3 +29,19 @@ $(function() {
         }
     });
 });
+
+$(document).on("click", ".left-menu a", function(e) {
+    var id = $(this).attr('href');
+    var top = $(id).offset().top - 150; // получаем координаты блока
+    $('body, html').animate({ scrollTop: top }, 100); // плавно переходим к блоку
+});
+$(function() {
+    $(".mobile-nav a").on("click", function() {
+        $('.mobile-nav').removeClass('open');
+        $('.icon-menu').removeClass('open');
+        var id = $(this).attr('href');
+        var top = $(id).offset().top - 150; // получаем координаты блока
+        $('body, html').animate({ scrollTop: top }, 100); // плавно переходим к блоку
+
+    });
+})
